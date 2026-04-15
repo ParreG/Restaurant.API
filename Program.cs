@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,21 +14,26 @@ namespace RestrurantPG
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddConnectionString(builder.Configuration);
-            builder.Services.AddApplicationServices(); // mina DIs
-
+            builder.Services.AddApplicationServices();
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-
             builder.Services.SwaggerConfig();
-            builder.Services.AddJwtAuth(builder.Configuration); // JWt auth
-
+            builder.Services.AddJwtAuth(builder.Configuration);
             builder.Services.AddAuthorization();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200", "https://localhost:7271")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+            });
+
             var app = builder.Build();
-            // Configure the HTTP request pipeline.
 
             if (app.Environment.IsDevelopment())
             {
@@ -37,8 +41,8 @@ namespace RestrurantPG
                 app.UseSwaggerUI();
             }
 
-
             app.UseHttpsRedirection();
+            app.UseCors("AllowAngular");
 
             app.UseAuthentication();
             app.UseAuthorization();

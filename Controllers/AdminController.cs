@@ -61,7 +61,5 @@ namespace RestrurantPG.Controllers
 
             return Ok(result.admin);
         }
-
-        // Ska fortsätta med att ändra invites! 
     }
 }
