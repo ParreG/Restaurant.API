@@ -102,5 +102,6 @@ Registration requires a valid invite code — new invites can only be generated 
 
 ## Related Repos
 
-- [restaurant-angular](https://github.com/ParreG/ResturangPG_Angular) — Angular frontend consuming this API
-- [restaurant-mvc](https://github.com/ParreG/ResturantPG_MVC) — ASP.NET MVC frontend for server-side rendered views
+| [restaurant-angular](https://github.com/ParreG/ResturangPG_Angular) — Angular frontend consuming this API |
+| [restaurant-api](https://github.com/ParreG/Restaurant.API) | REST API — the backend |
+| [restaurant-mvc](https://github.com/ParreG/Restaurant.MVC) | MVC frontend — server-rendered views |
